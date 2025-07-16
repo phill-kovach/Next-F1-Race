@@ -16,8 +16,7 @@
             width: 100%;
             height: 100%;
             margin: 0;
-            /* General font stack for the body */
-            font-family: 'Titillium Web', sans-serif;
+            font-family: 'Titillium Web', sans-serif; /* Reverted font-family */
             background-color: #1a1a1a; /* Dark background */
             display: flex;
             justify-content: center;
@@ -169,12 +168,7 @@
             font-size: 0.9rem;
             color: #a0a0a0;
         }
-        .flag-emoji {
-            margin-right: 8px; /* Space between flag and race name */
-            font-size: 1.2em; /* Slightly larger flag */
-            /* Explicitly set emoji font for flags */
-            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", sans-serif;
-        }
+        /* .flag-emoji CSS rule removed */
 
         /* Responsive adjustments */
         @media (max-width: 640px) {
@@ -232,35 +226,7 @@
             // Static background image for the main countdown section
             const backgroundImageURL = "https://cdn.magicdecor.in/com/2025/01/22172354/Red-Formula-One-Car-Wallpaper-Mural.jpg";
 
-            // Map country names to emoji flags
-            // This list covers most F1 race host countries. Add more if needed.
-            const countryFlags = {
-                "Australia": "🇦🇺",
-                "Austria": "🇦🇹",
-                "Azerbaijan": "🇦🇿",
-                "Bahrain": "🇧🇭",
-                "Belgium": "🇧🇪",
-                "Brazil": "🇧🇷",
-                "Canada": "🇨🇦",
-                "China": "🇨🇳",
-                "France": "🇫🇷",
-                "Germany": "🇩🇪",
-                "Hungary": "🇭🇺",
-                "Italy": "🇮🇹",
-                "Japan": "🇯🇵",
-                "Mexico": "🇲🇽",
-                "Monaco": "🇲🇨",
-                "Netherlands": "🇳🇱",
-                "Qatar": "🇶🇦",
-                "Saudi Arabia": "🇸🇦",
-                "Singapore": "🇸🇬",
-                "Spain": "🇪🇸",
-                "United Kingdom": "🇬🇧",
-                "USA": "🇺🇸",
-                "United States": "🇺🇸", // Common alternative
-                "United Arab Emirates": "🇦🇪",
-                "default": "🏁" // Checkered flag emoji as a fallback
-            };
+            // countryFlags object removed
 
             /**
              * Formats a date string for display.
@@ -374,10 +340,6 @@
                 const nextRace = raceData.nextRace;
                 const subsequentRaces = raceData.subsequentRaces;
 
-                // Get flag for the next race
-                const nextRaceCountry = nextRace.Circuit.Location.country;
-                const nextRaceFlag = countryFlags[nextRaceCountry] || countryFlags["default"];
-
                 // Set the background image dynamically
                 const nextRaceSectionStyle = `
                     background-image: url('${backgroundImageURL}');
@@ -388,7 +350,7 @@
 
                 let html = `
                     <div class="next-race-section" style="${nextRaceSectionStyle}">
-                        <h2><span class="flag-emoji">${nextRaceFlag}</span>${nextRace.raceName}</h2>
+                        <h2>${nextRace.raceName}</h2>
                         <p>${nextRace.Circuit.Location.locality}, ${nextRace.Circuit.Location.country}</p>
                         <div class="countdown">
                             <div class="countdown-item" id="countdown-days">00<span>Days</span></div>
@@ -407,11 +369,10 @@
                             <ul class="race-list">
                     `;
                     subsequentRaces.forEach(race => {
-                        const raceCountry = race.Circuit.Location.country;
-                        const raceFlag = countryFlags[raceCountry] || countryFlags["default"];
+                        // Removed flag logic here
                         html += `
                                 <li class="race-item">
-                                    <span class="flag-emoji">${raceFlag}</span><span class="race-name">${race.raceName}</span>
+                                    <span class="race-name">${race.raceName}</span>
                                     <span class="race-date">${formatDisplayDate(race.date)}</span>
                                 </li>
                         `;
@@ -461,4 +422,5 @@
     </script>
 </body>
 </html>
+
 
